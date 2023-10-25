@@ -1,0 +1,12 @@
+{
+    "gifts": [
+        { "id": 1, "gift": "Jane Austen Box Set", "gift-type": "Book", "recipientId": 1, "reaction": "positive" },
+        { "id": 2, "gift": "Balance Bike", "gift-type": "Toy", "recipientId": 2, "reaction": "positive"},
+        { "id": 3, "gift": "Winter Headband", "gift-type": "Clothing", "recipientId": 1, "reaction": "neutral"},
+        { "id": 4, "gift": "Nursing Dresses", "gift-type": "Clothing", "recipientId": 1, "reaction": "positive"}
+    ],
+    "recipients": [
+        { "id": 1, "name": "Wife"},
+        { "id": 2, "name": "Child 1"}
+    ]
+}
