@@ -1,0 +1,12 @@
+.recipient-card {
+    margin: 0 0 1.5rem 0;
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #006130;
+    border-radius: 1rem;
+    box-shadow: 2px 1px 5px #006130;
+}
+
+.gift-table {
+    width: 100%;
+}
