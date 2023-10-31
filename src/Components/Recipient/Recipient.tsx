@@ -1,15 +1,11 @@
+import giftProps from '../../Interfaces/interfaces';
 import Gift from '../Gift/Gift';
 import './Recipient.css';
 
 interface recipientProps {
     id: number,
     name: string,
-    gifts: [{
-        id: number,
-        giftTitle: string,
-        giftType: string,
-        reaction: string
-    }]
+    gifts: giftProps[]
 }
 
 function Recipient({ id, name, gifts }: recipientProps) {

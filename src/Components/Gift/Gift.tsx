@@ -1,9 +1,4 @@
-interface giftProps {
-    id: number,
-    giftTitle: string,
-    giftType: string,
-    reaction: string
-}
+import giftProps from '../../Interfaces/interfaces';
 
 function Gift({id, giftTitle, giftType, reaction }: giftProps) {
     return (
