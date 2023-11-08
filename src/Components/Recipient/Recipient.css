@@ -10,3 +10,11 @@
 .gift-table {
     width: 100%;
 }
+
+.add-gift-form-container {
+    display: none;
+}
+
+.add-gift-form-container.active {
+    display: block;
+}
