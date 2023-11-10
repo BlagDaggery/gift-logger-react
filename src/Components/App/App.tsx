@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import giftProps from '../../Interfaces/interfaces';
 import Recipient from '../Recipient/Recipient';
 import './App.css';
 
+interface recipientData {
+    id: number,
+    name: string,
+    gifts: giftProps[]
+}
+
 function App() {
-    const [recipients, setRecipients] = useState([{
-        id: 0,
-        name: "Blaine",
-        gifts: [{ id: 0, giftTitle: 'blah', giftType: 'blah', reaction: 'neutral' }]
-    }]);
+    const [recipients, setRecipients] = useState<recipientData[] | null>(null);
 
     useEffect(() => {
         async function getRecipients() {
@@ -22,7 +25,7 @@ function App() {
     return (
         <>
             <h1>Gift Logger</h1>
-            {recipients.map(recipient => {
+            {recipients && recipients.map(recipient => {
                 return <Recipient key={recipient.id} id={recipient.id} name={recipient.name} gifts={recipient.gifts} />
             })}
         </>
