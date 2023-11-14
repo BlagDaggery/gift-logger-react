@@ -18,3 +18,52 @@
 .add-gift-form-container.active {
     display: block;
 }
+
+.new-gift-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+@media screen and (max-width: 899px) {
+    .new-gift-form {
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    .new-gift-form label .label-text {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .new-gift-form {
+        align-items: stretch;
+    }
+
+    .new-gift-form label {
+        flex-wrap: wrap;
+    }
+
+    .new-gift-form label .label-text {
+        width: 100%;
+    }
+}
+
+
+.new-gift-form label {
+    margin: 0.5rem 1rem 0.5rem 0;
+    flex: 1 0 auto;
+    display: flex;
+}
+
+.new-gift-form .label-text {
+    padding: 0 0.5rem 0 0;
+    font-weight: bold;
+}
+
+.new-gift-form label input,
+.new-gift-form label select {
+    flex: 1 0 auto;
+    padding: 0.5rem;
+}

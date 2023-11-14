@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from 'react';
+import { SyntheticEvent } from 'react';
 import giftProps from '../../Interfaces/interfaces';
 import Gift from '../Gift/Gift';
 import './Recipient.css';
@@ -6,49 +6,16 @@ import './Recipient.css';
 interface recipientProps {
     id: number,
     name: string,
-    gifts: giftProps[]
+    gifts: giftProps[],
+    saveNewGift: (event: SyntheticEvent, id: number) => void
 }
 
-function Recipient({ id, name, gifts }: recipientProps) {
-
-    const [addGiftIsActive, setAddGiftIsActive] = useState('');
-
-    function handleButtonClick() {
-        addGiftIsActive ? setAddGiftIsActive('') : setAddGiftIsActive('active');
-    }
-
-    function saveGiftData(event: BaseSyntheticEvent){
-        console.log(event);
-        event.preventDefault();
-
-        const fd = new FormData(event.target);
-        const data: object = Object.fromEntries(fd.entries());
-        
-        async function postGiftData(data: object) {
-            try {
-                const response = await fetch('http://localhost:3000/gifts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-                console.log("Success:", result);
-            } catch(error) {
-                console.error("Error:", error);
-            }
-        }
-
-        postGiftData(data);
-        setAddGiftIsActive('');
-    }
+function Recipient({ id, name, gifts, saveNewGift }: recipientProps) {
 
     return (
         <div className='recipient-card'>
             <h2 id={`recipient${id.toString()}`}>{name}</h2>
-            
+
             <div className='gift-list'>
                 <table className='gift-table'>
                     <thead>
@@ -65,26 +32,26 @@ function Recipient({ id, name, gifts }: recipientProps) {
                     </tbody>
                 </table>
             </div>
-            <div className={`add-gift-form-container ${addGiftIsActive}`}>
-                <form onSubmit={saveGiftData}>
-                    <label>Gift Name
-                        <input name='giftTitle' type='text'></input>
-                    </label>
-                    <label>Gift Type
-                        <input name='giftType' type='text'></input>
-                    </label>
-                    <label>Reaction
-                        <select name='reaction'>
-                            <option>Positive</option>
-                            <option>Neutral</option>
-                            <option>Negative</option>
-                        </select>
-                    </label>
-                    <input type='hidden' name='recipientId' value={id} />
-                    <button>Save Gift</button>
-                </form>
-            </div>
-            <button onClick={handleButtonClick}>Add Gift</button>
+            <h3>Add a New Gift</h3>
+            <form className='new-gift-form' onSubmit={(event) => saveNewGift(event, id)}>
+                <label>
+                    <span className='label-text'>Gift Name</span>
+                    <input name='giftTitle' type='text'></input>
+                </label>
+                <label>
+                    <span className='label-text'>Gift Type</span>
+                    <input name='giftType' type='text'></input>
+                </label>
+                <label>
+                    <span className='label-text'>Reaction</span>
+                    <select name='reaction'>
+                        <option>Positive</option>
+                        <option>Neutral</option>
+                        <option>Negative</option>
+                    </select>
+                </label>
+                <button type='submit'>Save Gift</button>
+            </form>
         </div>
     )
 }
