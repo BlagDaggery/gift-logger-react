@@ -55,6 +55,7 @@
     margin: 0.5rem 1rem 0.5rem 0;
     flex: 1 0 auto;
     display: flex;
+    align-items: center;
 }
 
 .new-gift-form .label-text {
