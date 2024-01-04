@@ -1,11 +1,30 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Colors */
+  --green-light: #63AA78;
+  --green-primary: #006130;
+  --green-dark: #0D4222;
+
+  --purple-light: #B392A4;
+  --purple-primary: #6C4B5E;
+  --purple-dark: #48333F;
+
+  /* Gray Scale */
+  --white: #ffffff;
+  --white-soft: #f3f3f3;
+  --gray-lightest: #DDDDDD;
+  --gray-light: #B0B0B0;
+  --gray: #868686;
+  --gray-dark: #5E5E5E;
+  --gray-darkest: #393939;
+  --black: #1F1F1F;
+
+  font-family: 'Cabin', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--gray-lightest);
+  background-color: var(--black);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,12 +34,27 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  transition: color 0.25s;
 }
+
+a:link {
+  color: var(--green-light);
+}
+
+a:visited {
+  color: var(--green-light);
+}
+
+a:focus {
+  color: var(--purple-light);
+}
+
 a:hover {
-  color: #535bf2;
+  color: var(--purple-light);
+}
+
+a:active {
+  color: var(--purple-light);
 }
 
 body {
@@ -30,42 +64,162 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2rem;
+  line-height: 1.25;
+}
+
+@media (min-width: 43.75rem) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.125;
+  }
+}
+
+@media (min-width: 56.25rem) {
+  h1 {
+    font-size: 3rem;
+    line-height: 1.05;
+  }
 }
 
 h2 {
-  margin: 0 0 1rem;
+  font-size: 1.625rem;
+  line-height: 1.15384615;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+@media (min-width: 43.75rem) {
+  h2 {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+}
+
+@media (min-width: 56.25rem) {
+  h2 {
+    font-size: 2.25rem;
+    line-height: 1.25;
+  }
+}
+
+h3 {
+  font-size: 1.375rem;
+  line-height: 1.13636364;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 43.75rem) {
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+}
+
+@media (min-width: 56.25rem) {
+  h3 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+}
+
+h4 {
+  font-size: 1.125rem;
+  line-height: 1.11111111;
+}
+
+@media (min-width: 43.75rem) {
+  h4 {
+    line-height: 1.22222222;
+  }
+}
+
+.btn {
   font-family: inherit;
-  background-color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  padding: 0.75rem 1.25rem;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+
+@media (prefers-color-scheme: dark) {
+  .btn.btn-primary {
+    background-color: var(--green-light);
+    border-color: var(--green-light);
+    color: var(--black);
+  }
+
+  .btn.btn-primary:hover,
+  .btn.btn-primary:focus {
+    background-color: transparent;
+    border-color: var(--green-light);
+    color: var(--green-light);
+  }
+
+  .btn.btn-secondary {
+    background-color: var(--purple-light);
+    border-color: var(--purple-light);
+    color: var(--black);
+  }
+
+  .btn.btn-secondary:hover,
+  .btn.btn-secondary:focus {
+    background-color: transparent;
+    border-color: var(--purple-light);
+    color: var(--purple-light);
+  }
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+@media (prefers-color-scheme: light) {
+  .btn.btn-primary {
+    background-color: var(--green-primary);
+    border-color: var(--green-primary);
+    color: var(--white-soft);
+  }
+
+  .btn.btn-primary:hover,
+  .btn.btn-primary:focus {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+  }
+
+  .btn.btn-secondary {
+    background-color: var(--purple-primary);
+    border-color: var(--purple-primary);
+    color: var(--white-soft);
+  }
+
+  .btn.btn-secondary:hover,
+  .btn.btn-secondary:focus {
+    background-color: var(--purple-dark);
+    border-color: var(--purple-dark);
+  }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--black);
+    background-color: var(--white);
   }
+
+  a:link {
+    color: var(--green-primary);
+  }
+  
+  a:visited {
+    color: var(--green-primary);
+  }
+  
+  a:focus {
+    color: var(--purple-primary);
+  }
+  
   a:hover {
-    color: #747bff;
+    color: var(--purple-primary);
   }
-  button {
-    background-color: #f9f9f9;
+  
+  a:active {
+    color: var(--purple-primary);
   }
 }
