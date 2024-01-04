@@ -81,7 +81,7 @@ function Recipient({ id, name, gifts, saveNewGift }: recipientProps) {
                         <option>Negative</option>
                     </select>
                 </label>
-                <button type='submit'>Save Gift</button>
+                <button className='btn btn-primary' type='submit'>Save Gift</button>
             </form>
         </div>
     )
