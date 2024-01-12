@@ -19,6 +19,19 @@ function App() {
     async function getRecipients() {
         const response: Response = await fetch('http://localhost:3000/recipients?_embed=gifts');
         const data = await response.json();
+
+        data.forEach((recipient: recipientData) => {
+            recipient.gifts.sort((a: giftProps, b: giftProps) => {
+                if (a.dateGiven < b.dateGiven) {
+                    return 1;
+                } else if (a.dateGiven > b.dateGiven) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+        });
+
         setRecipients(data);
     }
 
