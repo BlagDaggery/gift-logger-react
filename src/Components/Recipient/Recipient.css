@@ -1,13 +1,26 @@
 .recipient-card {
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 3.5rem 0;
     padding: 1rem;
     text-align: left;
     border: 1px solid var(--gray-light);
     border-radius: 1rem;
+    box-shadow: 0 0 10px 0 var(--green-light);
 }
 
 .gift-table {
     width: 100%;
+}
+
+.gift-table tbody tr:nth-of-type(odd) {
+    background-color: var(--gray-dark);
+}
+
+.gift-table tbody tr:nth-of-type(even) {
+    background-color: var(--gray-darkest);
+}
+
+.gift-table tbody tr td {
+    padding: 0.25rem;
 }
 
 .add-gift-form-container {
@@ -70,8 +83,16 @@
 
 @media (prefers-color-scheme: light) {
     .recipient-card {
-        border: 1px solid var(--green-primary);
-        box-shadow: 2px 1px 5px var(--green-light);
+        border: 2px solid var(--green-primary);
         background-color: var(--white);
+        box-shadow: 0 0 5px var(--green-light);
+    }
+
+    .gift-table tbody tr:nth-of-type(odd) {
+        background-color: var(--gray-lightest);
+    }
+    
+    .gift-table tbody tr:nth-of-type(even) {
+        background-color: var(--white-soft);
     }
   }
