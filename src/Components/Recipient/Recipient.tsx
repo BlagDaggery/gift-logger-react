@@ -52,7 +52,6 @@ function Recipient({ id, name, gifts, saveNewGift }: recipientProps) {
                 <label>
                     <span className='label-text'>Occasion</span>
                     <select name='occasion' required>
-                        <option value="" selected disabled>-- Please choose an option --</option>
                         <option>Anniversary</option>
                         <option>Birthday</option>
                         <option>Christmas</option>
@@ -75,7 +74,6 @@ function Recipient({ id, name, gifts, saveNewGift }: recipientProps) {
                 <label>
                     <span className='label-text'>Reaction</span>
                     <select name='reaction' required>
-                        <option value="" selected disabled>-- Please choose an option --</option>
                         <option>Positive</option>
                         <option>Neutral</option>
                         <option>Negative</option>
