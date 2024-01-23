@@ -8,7 +8,16 @@
 }
 
 .gift-table {
+    display: block;
     width: 100%;
+    overflow-x: auto;
+    background-color: var(--black);
+    border: 1px solid var(--gray-dark);
+    border-radius: 4px;
+}
+
+.gift-table tbody {
+    white-space: nowrap;
 }
 
 .gift-table tbody tr:nth-of-type(odd) {
@@ -19,8 +28,10 @@
     background-color: var(--gray-darkest);
 }
 
-.gift-table tbody tr td {
-    padding: 0.25rem;
+.gift-table td,
+.gift-table th {
+    padding: 0.5rem;
+    width: 1%;
 }
 
 .add-gift-form-container {
@@ -88,11 +99,15 @@
         box-shadow: 0 0 5px var(--green-light);
     }
 
+    .gift-table {
+        background-color: var(--white);
+    }
+
     .gift-table tbody tr:nth-of-type(odd) {
         background-color: var(--gray-lightest);
     }
-    
+
     .gift-table tbody tr:nth-of-type(even) {
         background-color: var(--white-soft);
     }
-  }
+}
