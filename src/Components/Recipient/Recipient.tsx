@@ -13,7 +13,7 @@ interface recipientProps {
 function Recipient({ id, name, gifts, saveNewGift }: recipientProps) {
 
     return (
-        <div className='recipient-card'>
+        <div className='card'>
             <h2 id={`recipient${id.toString()}`}>{name}</h2>
 
             <div className='gift-list'>

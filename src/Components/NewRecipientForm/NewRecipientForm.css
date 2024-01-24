@@ -1,0 +1,10 @@
+#addNewRecipientForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#addNewRecipientForm .new-recipient-form-item {
+    margin: 0.5rem 0;
+}
