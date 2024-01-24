@@ -1,6 +1,7 @@
 import { useState, useEffect, SyntheticEvent } from 'react';
 import giftProps from '../../Interfaces/interfaces';
 import Recipient from '../Recipient/Recipient';
+import NewRecipientForm from '../NewRecipientForm/NewRecipientForm';
 import './App.css';
 
 interface recipientData {
@@ -35,26 +36,51 @@ function App() {
         setRecipients(data);
     }
 
+    function saveNewRecipient(event: SyntheticEvent) {
+        event.preventDefault();
+        const newRecipientForm: HTMLFormElement = event.target as HTMLFormElement;
+        const fd: FormData = new FormData(newRecipientForm);
+        const data: object = Object.fromEntries(fd.entries());
+
+        async function postRecipientData(data: object) {
+            try {
+                const response: Response = await fetch('http://localhost:3000/recipients', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result: object = await response.json();
+                console.log('Success:', result);
+                getRecipients();
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                newRecipientForm.reset();
+                toggleNewRecipientForm();
+            }
+        }
+
+        postRecipientData(data);
+    }
+
     function saveNewGift(event: SyntheticEvent, id: number) {
         event.preventDefault();
 
         const myForm: HTMLFormElement = event.target as HTMLFormElement;
         const fd: FormData = new FormData(myForm);
-        
         let data: object = Object.fromEntries(fd.entries());
-        data = {...data, recipientId: id};
+        data = { ...data, recipientId: id };
 
         async function postGiftData(data: object) {
             try {
-                const response = await fetch('http://localhost:3000/gifts', {
+                const response: Response = await fetch('http://localhost:3000/gifts', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
-                const result = await response.json();
+                const result: object = await response.json();
                 console.log('Success:', result);
                 getRecipients();
             } catch(error) {
@@ -65,6 +91,11 @@ function App() {
         }
 
         postGiftData(data);
+    }
+
+    function toggleNewRecipientForm() {
+        const newRecipientFormContainer: HTMLElement = document.querySelector('.new-recipient-form-container') as HTMLElement;
+        newRecipientFormContainer.classList.toggle('hidden');
     }
 
     return (
@@ -78,8 +109,14 @@ function App() {
                         name={recipient.name}
                         gifts={recipient.gifts}
                         saveNewGift={saveNewGift} />
-                ) 
+                )
             })}
+            <div className='add-btn-row'>
+                <button type='button' id='addNewRecipient' className='btn btn-secondary' onClick={toggleNewRecipientForm}>Add New Recipient</button>
+            </div>
+            <div className='new-recipient-form-container hidden'>
+                <NewRecipientForm saveNewRecipient={saveNewRecipient} />
+            </div>
         </>
     )
 }
