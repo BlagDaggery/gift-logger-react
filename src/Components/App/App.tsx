@@ -1,7 +1,8 @@
 import { useState, useEffect, SyntheticEvent } from 'react';
-import giftProps from '../../Interfaces/interfaces';
+import { giftProps, recipientOptions, newGiftProps }  from '../../Interfaces/interfaces';
 import Recipient from '../Recipient/Recipient';
 import NewRecipientForm from '../NewRecipientForm/NewRecipientForm';
+import NewGiftForm from '../NewGiftForm/NewGiftForm';
 import './App.css';
 
 interface recipientData {
@@ -12,6 +13,13 @@ interface recipientData {
 
 function App() {
     const [recipients, setRecipients] = useState<recipientData[] | null>(null);
+
+    const recipientOptions: recipientOptions[] = recipients ? recipients.map(recipient => {
+        return {
+            id: recipient.id,
+            name: recipient.name
+        }
+    }): [];
 
     useEffect(() => {
         getRecipients();
@@ -64,13 +72,16 @@ function App() {
         postRecipientData(data);
     }
 
-    function saveNewGift(event: SyntheticEvent, id: number) {
+    function saveNewGift(event: SyntheticEvent) {
         event.preventDefault();
 
         const myForm: HTMLFormElement = event.target as HTMLFormElement;
         const fd: FormData = new FormData(myForm);
-        let data: object = Object.fromEntries(fd.entries());
-        data = { ...data, recipientId: id };
+        const strRecipientId: string = fd.get('recipientId') as string;
+        const numRecipientId: number = parseInt(strRecipientId);
+
+        let data: newGiftProps = Object.fromEntries(fd.entries()) as unknown as newGiftProps;
+        data = { ...data, recipientId: numRecipientId };
 
         async function postGiftData(data: object) {
             try {
@@ -101,22 +112,25 @@ function App() {
     return (
         <>
             <h1>Gift Logger</h1>
+            <div className='add-btn-row'>
+                <button type='button' id='addNewGift' className='btn btn-primary'>Add New Gift</button>
+                <button type='button' id='addNewRecipient' className='btn btn-secondary' onClick={toggleNewRecipientForm}>Add New Recipient</button>
+            </div>
+            <div className='new-recipient-form-container hidden'>
+                <NewRecipientForm saveNewRecipient={saveNewRecipient} />
+            </div>
+            <div className='new-gift-form-container'>
+                <NewGiftForm saveNewGift={saveNewGift} recipientOptions={recipientOptions} />
+            </div>
             {recipients && recipients.map(recipient => {
                 return (
                     <Recipient
                         key={recipient.id}
                         id={recipient.id}
                         name={recipient.name}
-                        gifts={recipient.gifts}
-                        saveNewGift={saveNewGift} />
+                        gifts={recipient.gifts} />
                 )
             })}
-            <div className='add-btn-row'>
-                <button type='button' id='addNewRecipient' className='btn btn-secondary' onClick={toggleNewRecipientForm}>Add New Recipient</button>
-            </div>
-            <div className='new-recipient-form-container hidden'>
-                <NewRecipientForm saveNewRecipient={saveNewRecipient} />
-            </div>
         </>
     )
 }
